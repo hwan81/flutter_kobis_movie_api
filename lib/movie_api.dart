@@ -4,12 +4,13 @@ import 'package:date_format/date_format.dart';
 
 // https://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do?serviceId=searchDailyBoxOffice
 class MovieApi {
-  late final String? dt;
+  late final String dt;
 
-  MovieApi() {
-    var yesterday = DateTime.now().subtract(const Duration(days: 1));
-    dt = formatDate(yesterday, [yyyy, mm, dd]);
-    // print(dt);
+  MovieApi({this.dt = ''}) {
+    if (dt.length != 8) {
+      var yesterday = DateTime.now().subtract(const Duration(days: 1));
+      dt = formatDate(yesterday, [yyyy, mm, dd]);
+    }
   }
 
   Future<List<dynamic>> getMoives() async {
